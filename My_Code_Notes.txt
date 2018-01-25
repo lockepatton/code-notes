@@ -1,0 +1,162 @@
+MY CODE NOTES
+
+#Permission error? Use:
+sudo
+
+#JUPYTER NOTEBOOK
+%run utils.py			# run python file/jn; saves variables; shows plots/outputs 
+%timeit				# times code one-line
+%%timit				# times entire file
+%%writefile utils.py		# - writes cell as a file
+%%writefile -a utils.py		# appends
+%pycat utils.py			# brings up file in separate pane (w/ syntax highlights)
+%load utils.py			# pastes utils.py snippet of code into jn (will reload)
+%%latex				# run entire cell as latex
+!ls				# runs shell commands as if in terminal
+files = !ls -1			# define output of external tool as array in python
+files = !ls -1 {variable-name}	# grabs variable name
+terminal in python		# have access to terminal in python
+
+#IRAF/PYRAF
+hedit *fits EXPTIME “(exposure)” add+ ver-
+
+#BASH
+cal #calendar
+tac #cat's file backwords
+
+#SCRIPTING
+for f in *.fits; do mv “$f” “20160702$f”; done
+for f in *fits*coo*; do cat "$f" | wc; done
+while read f; do echo $f; done < text.txt
+
+#counts number lines in documents *fits*coo (IE # stars +41 header lines) 	Must be done in new window (prob bin/tcsh/)
+
+#ECHO
+#selections - splits by _ and . 4 is 4th section.
+echo "abc_asdfjhdsf_dfksfj_12345678.csv" | awk -F'[_.]' '{print $4}'
+
+#TAR
+tar -zcvf Levesque_Nov14_2016 ./Levesque/ tar -zxvf Levesque_Nov14_2016.zip
+
+#SCP
+scp /Users/amielpatton-hall/Desktop/ASTR481/data/REDUCEDWITHHEADERS.tar.gz amielp@gateway.astro.washington.edu:~
+scp -r MasseyHubble/ lockep@mikey.lowell.edu:/Users/lockep/LH41Hubble
+
+#FTP
+https://www.cs.colostate.edu/helpdocs/ftp.html
+ftp anonymous@stdatu.stsci.edu   #Hubble data - username = email
+
+#list chronologically
+ls -ltr
+
+#re-define upper limits
+ulimit -a	#see all upper limits
+ulimit -n 512	#change max # of open files	#To run AME - ( apall multislit expansion )
+
+#mathematics in bash
+expr 100 \* 4
+echo '100 * 4' | bc
+python -c 'print 2+2'
+
+#GITHUB
+git pull https://github.com/amielp/A425_2016
+git clone https://github.com/amielp/A425_2016
+
+git status
+
+git log
+git log --oneline
+git log --oneline --decorate
+git log --oneline --decorate --graph --all
+
+git branch			#lists branch
+git branch new-feature		#creates new branch
+git checkout new-feature	#moves to new-feature
+git checkout -b new-feature	#checkouts and creates new branch
+git checkout -b new-feature branch-to-branch-from	#checkouts and creates new branch
+
+git merge new-feature		#new-feature merges with current branch (master)
+				#as new commit on current branch (master)
+
+git add filename
+git add LockePatton/
+git add LockePatton/Homework_1_LockePatton/
+
+git commit -am "Adding LockePatton Folder and Homework1 file"	#-a is “all” files
+(-a says all added files)
+
+git pull origin master		#gets the latest version and merges the changes
+git push origin master		#publishes master branch to github backup (origin) 
+git push -u --all		#publishes all branches to github backup (origin)
+git pull https://github.com/path/to/repo.git master	# pulls repo from master branch 
+
+
+#Git - globals
+git config --global user.name "Locke Patton"
+git config --global user.email "amielp@uw.edu"
+cat ~/.gitconfig
+
+#diff format  (can feed a diff to a patch)
+git diff HEAD^
+git diff HEAD^^
+git diff ccd1..b065
+git diff ccd199e8ddacd8a22970fb8916a6f76f9f3bf2f6..b0653f85217cfd15b5ad24b9436fe67092a4a9b9
+
+git remote -v  #lists repositories
+git remote add upstream https://github.com/connolly/A425_2016.git
+
+TO UPDATE master with upstream:
+git fetch upstream
+git merge upstream/master
+
+git rm --cached *fits
+git commit --ammend -CHEAD
+git commit
+
+#Pushing already built repository
+git remote add origin https://github.com/lockepatton/astr302-lockepatton.git
+					#creates an alias to origin
+git push -u origin master		#pushes master branch to origin
+					#(destination = github online)
+git push -u --all			#pushes all branches to origin
+			-u : remember relationships
+			#next time you type git push and no need to remember!
+
+#Origin
+git remote show				#shows remote locations
+git remote get-url origin		#shows url of origin
+
+^Z 		#to suspend
+ps		#list processes
+kill -9 PID	#end all be all of kill signals (-9)
+fg		#resumes process
+ps -ef		#lists (-e) all (-f) full processes
+
+https://github.com/tmux/tmux    #multiple terminal windows / terminal multiplexer
+http://gnudatalanguage.sourceforge.net/    #idl but for free
+
+
+#ASTROCONDA
+conda update --prefix //anaconda anaconda
+conda info
+conda info --envs
+conda remove --name iraf27 --all
+conda config --add channels http://ssb.stcsi.edu/astroconda
+conda create -n iraf27 python=2.7 iraf pyraf stsci
+.condarc file
+source activate iraf27      #then run pyraf per usual
+source deactivate iraf27
+
+
+#TIMERS
+while true; do echo -ne "`date +%H:%M:%S:%N`\r"; done
+while true; do echo -ne "`date`\r"; done
+
+
+#UREKA
+bin/ur_normalize
+#will correct directories for ur_setup and ur_forget programs #run while inside new directory (i.e when username switched)
+
+
+#OTHER
+> You need to pip install Plotly and use it!
