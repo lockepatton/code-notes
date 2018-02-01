@@ -1,0 +1,115 @@
+LINUX UNIX NOTES DAY 3
+
+
+TO GET LAST n NUMBER OF LINES
+tail -n 5 Random_Names.csv 	#last 5 rows
+tail -c 5000 Random_Names.csv	#last 50000 characters
+grep TX Random_Names.csv	#looks for TX and lists	#case-sensative
+grep WA -i wa Random_Names.csv	#ignores case-sensative
+grep ',WA' Random_Names.csv	#gives only washington folks (due to design)
+grep ',WA' Random_Names.csv | wc	#counts washington folks
+     73     182    1738
+lines	words	characters (or bytes)
+cat Random_Names.csv | grep ',WA' | wc	#Counts Washingtonians
+cat Random_Names.csv | grep ',WA' | grep -i 'smith' | wc	#Counts Washingtonians and Smiths
+
+ps -elf | grep -i amielp	#lists current programs running (from amielp)
+(Process Status)
+
+
+Note MobaXTerm has built-in editer within PC shit
+
+
+sort myfile.txt
+
+5
+523
+52357
+563
+572
+6
+67
+
+sort myfile.txt > myfile_sorted.txt	# > means Redirected
+
+whatis grep
+grep                 (1)  - print lines matching a pattern
+grep                 (1p)  - search a file for a pattern
+grep-changelog       (1)  - print ChangeLog entries matching criteria
+
+which grep	#shows which one will run most likely
+/bin/grep
+
+cd Dir\ With\ Spaces/	#changing directories with spaces
+cd "Dir With Spaces"
+cd 'Dir With Spaces'
+
+cat My\ File\ With\ Spaces.txt 
+
+
+GCC:
+cat wsw.c	#cat-ing program
+#include<stdio.h>
+
+
+main ()
+   {
+printf("Hello World\n");
+}
+
+gcc wsw.c	#running in c
+
+ls -la
+-rwxr-xr-x  1 amielp users  6415 Jul 25 14:11 a.out
+
+dante12$ gcc wsw.c -o wsw.exe
+-rwxr-xr-x  1 amielp users  6415 Jul 25 14:13 wsw.exe
+
+
+dante12$ chmod -x wsw.exe
+dante12$ wsw.exe
+-bash: wsw.exe: command not found
+
+dante12$ echo $PATH
+/usr/lib64/qt-3.3/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin/X11:/usr/local/X11/bin
+
+dante12$ ./wsw.exe
+-bash: ./wsw.exe: Permission denied
+
+dante12$ chmod +x wsw.exe
+-rwxr-xr-x  1 amielp users  6415 Jul 25 14:13 wsw.exe
+
+dante12$ ./wsw.exe
+Hello World
+
+
+
+dante12$ gcc SimpleSlowProgram.c -o slow.exe
+dante12$ ./slow.exe
+
+^C
+
+dante12$ ./slow.exe&
+[1] 7722
+
+dante12$ cat SlowWriting.txt 
+
+dante12$ ps -elf | grep -i amielp
+4 S root      4399 20232  0  80   0 - 24701 unix_s 13:30 ?        00:00:00 sshd: amielp [priv]
+5 S amielp    4419  4399  0  80   0 - 24701 poll_s 13:31 ?        00:00:00 sshd: amielp@pts/4
+0 S amielp    4420  4419  0  80   0 - 27788 wait   13:31 pts/4    00:00:00 -bash
+0 S amielp    7722  4420  0  80   0 -  1077 hrtime 14:18 pts/4    00:00:00 ./slow.exe
+0 R amielp    7790  4420  1  80   0 - 28298 -      14:20 pts/4    00:00:00 ps -elf
+0 S amielp    7791  4420  0  80   0 - 25828 pipe_w 14:20 pts/4    00:00:00 grep -i amielp
+
+
+dante12$ tail -f SlowWriting.txt	#refreshes
+
+dante12$ gcc SimpleSlowProgram.c -o slow.exe && ./slow.exe &		#does all of this at once
+
+dante12$ kill 8079
+dante12$ kill -9 8079	#superkill
+
+dante12$ pkill slow.exe	#partial matching
+
+dante12$ ps -elf | grep -i amielp | grep slow

@@ -1,0 +1,167 @@
+
+
+Linux Cheat Sheet / Unix Cheat Sheet
+-------------------------
+
+FACULTY/STAFF have access to    OVID.u.washington.edu and HOMER.u.washington.edu
+
+STUDENTS have access to DANTE.u.washington.edu and VERGIL.u.washington.edu
+
+
+USER ACTIVATE LINUX ACCOUNT
+-----------------------------  
+Step 1 – Goto http://MyUW.washington.edu
+Step 2 – Click on “My Account” at the TOP of the Page
+Step 3 – Select “Computing Services” on the Left Menu
+Step 4 – Select “Dante/Vergil Account”  or "Ovid/Homer Account" 
+Step 5 – Click “Subscribe” BUTTON
+
+
+
+
+EXAMPLE:  FIND LARGE FILES > 75M in /usr Folder
+-------------------------------------------
+find {/usr/} -type f -size +{75000}k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }'
+
+[CUR DIR]  
+find  ~  -type f  -size +2000k   
+find  ~  -type f  -size +2000k  -exec ls -lah {} \;
+find  ~  -type f  -size +2000k  -exec ls -lah {} \; | awk '{ print $9 ": " $5 }' 
+find  ~  -type f  -size +2000k  -exec ls -lah {} \; | awk '{ print $9 ": " $5 }'  | sort 
+find  ~  -type f  -size +2000k  -exec ls -lah {} \; | awk '{ print $9 ": " $5 }'  | sort  > Files_GT_2MB.txt
+
+ 
+
+tar  -czvf  myproject.tar  *.c	    Create Tar (with gzip) file "myproject.tar" with all FILES matching pattern *.c in VERBOSE mode
+tar  -xvf  myproject.tar	          Un-Tar/Zip and Extract the files
+tar  -vtf  myproject.tar	          List Contents in TAR file "myproject.tar"
+
+
+
+
+Get IP Adress ONLY:  
+   ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
+   ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
+
+
+Which Version of Linux
+------------------------
+cat /etc/issue
+Scientific Linux release 6.5 (Carbon)
+
+
+IMPORTANT NETWORK CONFIGURATION FILES
+--------------------------------------
+
+/etc/hosts
+/etc/sysconfig/network
+/etc/sysconfig/networ-scripts/ifc-eth0
+
+
+
+smbclient //udrive.uw.edu/udrive -U NETID/xxxx
+
+
+
+
+ls	Simple directory listing
+ls  -al	Long directory listing
+ls  -al  *.txt	Long listing of All *.txt files
+	
+hostname	Displays FULL DNS Hostname EX:  dante12.u.washington.edu
+	
+pwd	
+	
+cd	No switches takes to Home Directory
+cd  ~	Tilde is Special takes to Home Directory
+cd  /home/user/bob	Goto the /home/user/bob Subdirectory
+cd  ..	Double-Dot moves UP 1 Directory Level
+	
+man  ls	Shows manual/help for the ls command
+	
+mkdir    /dir/subdir/newfolder	Make "newfolder" inside the existing /dir/subdir folder
+mkdir  ~/temp	Make a new folder named "temp" inside your HOME_DIRECTORY
+	
+mv  old_file   new_file	Renames file "old_file" to "new_file"
+	
+cp  file1.txt  file2.txt	Copies "file1.txt"  to  "file2.txt"
+	
+"date
+date -u"	
+	
+who	Shows list of users current logged in
+who -q	Shows list of users current logged with TOTAL COUNT of users
+	
+whoami	Displays your UserID
+whoami  --help	Displays help about the command (Similar to MAN Pages, not all commands have --help option)
+whoami  --version	Displays information about who wrote/maintains this command
+	
+last	Shows Last users logged in and time
+last  -w	Same as above but WIDE format
+	
+	
+	
+cat  myfile.txt	Displays the contents of "myfile.txt"
+cat  -n  myfile.txt	Displays the contents of "myfile.txt" WITH Line Numbers
+cat  myfile.txt  |  more	Displays the contents of "myfile.txt", ONE SCREEN AT A TIME, Spacebar shows Next Page.
+	
+	
+touch  myfile.txt	Update the access and modification times of "myfile.txt"  to the current time.
+	
+NO EXAMPLES GIVEN, will show in class	**WARNING** Remember Unix DOES WHAT YOU TELL IT WITHOUT PROMPTING YOU.
+	
+chmod  777  file1.c	Sets User/Group/Others to have READ/WRITE/EXECUTE Permissions on "file1.c"
+chmod  g+rw  file1.c	Sets GROUP to have READ/WRITE permissions on "file1.c"
+chmod  o-rwx  file1.c	Removes   READ/WRITE/EXECUTE Permssions for OTHERS on "file1.c"
+	
+ssh  -X  netid@dante.u.washington.edu 	Remotely connect to Server "dante.u.washington.edu" with username "netid" with X11 Forwarding
+	
+chgrp <group_name>  file1.c	Changes the GROUP Ownership of "file1.c"
+	
+sort  numbers.txt	Displays the file contents of "numbers.txt" sorted on the screen.
+sort  num.txt > num_sorted.txt	Sorts the CONTENT of "num.txt" and puts it into new file "num_sorted.txt"
+	
+tail  some_file	Shows the LAST 10 lines of content in file "some_file"
+tail  -n 36  some_file	Shows the LAST 36 lines of content in file "some_file"
+tail  -f  some_file	Display and REFRESH every 1 Second "some_file".  Used to WATCH a file that is changing.  NOTE:  File writes MAY be buffered.
+	
+head some_file	Show FIRST 10 lines of content in file "some_file"
+head -n 44  some_file	Show FIRST 44 lines of content in file "some_file"
+	
+wc  dir4.txt	Shows 
+	
+echo $PATH	Display ENVIRONMENT Variable PATH which contains all of the search paths for commands
+echo $SHELL	Display ENVIRONMENT  Variable SHELL which determines how commands are processed at the command line
+echo 'This is way Coooool!!!!!'	Display the QUOTED Text "This is way Cooool!!!"
+	
+diff  -i  a.txt  b.txt 	Show difference between file "a.txt" and "b.txt" ignoring Character case (Uppercase/Lowercase)
+diff  -w  a.txt  b.txt	Show difference between file "a.txt" and "b.txt" ignoring ALL WHITE Space
+	
+df  -h	Show Disk Usage in HUMAN-READABLE format
+	
+ps -elf  |  more	Show EVERY process, FULL and LONG Listing  Pausing after EVERY SCREEN FULL of information
+	
+	
+tar  -czvf  myproject.tar  *.c	Create Tar (with gzip) file "myproject.tar" with all FILES matching pattern *.c in VERBOSE mode
+tar  -xvf  myproject.tar	Un-Tar/Zip and Extract the files
+tar  -vtf  myproject.tar	List Contents in TAR file "myproject.tar"
+	
+kill  12345	Kill / Stop ProcessID  12345 from running.
+	
+pkill  MyProgram	Kill processing running that contain the string "MyProgram", would Kill "MyProgram.exe", "MyProgram2.exe", "MyProgram3.exe", "MyProgram.sh"
+	
+set	
+	
+which grep	Displays the FULL PATH of the "grep" command.  Note:  You should have several versions of the command
+	
+whatis grep	Short normally 1 Line Description of COMMAND
+	
+xclock	IF AVAILABLE opens xclock GUI to test if X Windows is being redirected correctly
+	
+history	
+	
+"scp  <space> waldrw@vole.phys.washington.edu:/local/LDAP/auto.int  <space>   ~/Stuff/
+"	Copy file "/local/LDAP/auto.int" on OTHER Server "vole.phys.washington.edu" onto CURRENT System and put in "~/Stuff/"  Directory
+
+
+

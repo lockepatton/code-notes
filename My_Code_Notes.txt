@@ -34,6 +34,8 @@ while read f; do echo $f; done < text.txt
 #ECHO
 #selections - splits by _ and . 4 is 4th section.
 echo "abc_asdfjhdsf_dfksfj_12345678.csv" | awk -F'[_.]' '{print $4}'
+ls *json
+while read f; do echo $f | awk -F'[_.]' '{print $1}'; done < SNall.txt > SN.txt
 
 #TAR
 tar -zcvf Levesque_Nov14_2016 ./Levesque/ tar -zxvf Levesque_Nov14_2016.zip
@@ -135,7 +137,6 @@ ps -ef		#lists (-e) all (-f) full processes
 https://github.com/tmux/tmux    #multiple terminal windows / terminal multiplexer
 http://gnudatalanguage.sourceforge.net/    #idl but for free
 
-
 #ASTROCONDA
 conda update --prefix //anaconda anaconda
 conda info
@@ -147,16 +148,63 @@ conda create -n iraf27 python=2.7 iraf pyraf stsci
 source activate iraf27      #then run pyraf per usual
 source deactivate iraf27
 
+#SQL
+
+#Building databases
+qlite3 sdss.db
+CREATE TABLE sources (
+    run         INTEGER,
+    rerun       INTEGER,
+    camcol      INTEGER,
+    field       INTEGER,
+    obj         INTEGER,
+    type        INTEGER,
+    ra          REAL,
+    dec         REAL,
+    psfMag_r    REAL,
+    psfMag_g    REAL,
+    psfMgErr_r  REAL,
+    psfMagErr_g REAL
+);
+.quit
+
+#Reading in csv's
+sqlite3 sdss.db
+sqlite> .mode csv
+sqlite> .separator " "
+sqlite> .import runs.in runs
+sqlite> .quit
+
+#Updating database w\ SQL (note: no backups - be careful not to forget WHERE)
+UPDATE sources
+SET psfMag_r = NULL
+WHERE psfMag_r = -9999.0
+
+#Queries
+SELECT ra, dec, psfMag_r FROM sources
+SELECT ra, dec, psfMag_r FROM sources WHERE psfMag_r < 21.5
+SELECT ra, dec, psfMag_r FROM sources WHERE psfMag_r < 21.5 LIMIT 5
+SELECT COUNT(psfMag_r), AVG(psfMag_r) FROM sources WHERE psfMag_r < 21.5
+SELECT COUNT(*), run FROM sources GROUP BY run				#bins data by run
+									#COUNT(*) = # rows
+SELECT COUNT(*), run FROM sources GROUP BY run ORDER BY run		#don't use ORDER BY
+									#if dont have to
+SELECT run, camcol, COUNT(*) FROM sources GROUP BY run, camcol ORDER BY run DESC, camcol
+SELECT COUNT(*) as ct, run FROM sources GROUP BY run ORDER BY ct	#renames columns
+
+#Joining
+SELECT
+  sources.ra, sources.dec, sources.run, mjdstart
+FROM
+  sources JOIN runs ON sources.run = runs.run
 
 #TIMERS
 while true; do echo -ne "`date +%H:%M:%S:%N`\r"; done
 while true; do echo -ne "`date`\r"; done
 
-
 #UREKA
 bin/ur_normalize
 #will correct directories for ur_setup and ur_forget programs #run while inside new directory (i.e when username switched)
-
 
 #OTHER
 > You need to pip install Plotly and use it!

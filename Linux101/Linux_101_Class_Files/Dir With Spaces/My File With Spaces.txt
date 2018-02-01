@@ -1,0 +1,6 @@
+This is a regular TEXT File.
+
+This is a file with Spaces in it's name.
+
+The End!!
+

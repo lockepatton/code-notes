@@ -1,0 +1,35 @@
+
+Last Updated:  July 1st  2016
+
+This is the most important file that I have on my computer.
+
+I add notes to this all the time about UNIX/LINUX Commands.
+
+Added some more notes.
+
+This file just keeps getting longer and longer
+
+One day I should publish this as a Linux 101 boot camp.
+
+
+Linux Cheat Sheet / Unix Cheat Sheet
+-------------------------
+
+EXAMPLE:  FIND LARGE FILES > 75M in /usr Folder
+-------------------------------------------
+find {/usr/} -type f -size +{75000}k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }'
+
+[CUR DIR]  find . -type f -size +50000k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }' 
+
+Get IP Adress ONLY:  
+   ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
+   ifconfig wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'
+
+Which Version of Scientif Linux
+cat /etc/issue
+Scientific Linux release 6.5 (Carbon)
+
+
+
+
+

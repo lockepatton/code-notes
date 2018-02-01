@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+#---------------------------------------------------
+#  The following is NOT for the faint-hearted
+#---------------------------------------------------
+
+find . -type f -size +50000k 
+find . -type f -size +50000k -exec ls -lh {} \; 
+find . -type f -size +50000k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }'

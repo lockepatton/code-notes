@@ -1,0 +1,27 @@
+Notes from Linux 101 CLASS 1 = Jul 18 1:30pm, Monday
+
+Windows: MobaXterm is Brilliant and a linux environment
+
+PERMISSIONS
+
+ls -la			# -a does not ignore starting with .  -l is verbose
+ls -lag			# -g like -l but do not list owner
+
+
+file mode bits
+
+User|Group|World
+111 | 101 | 101
+rwx | r-x | r-x		#read write execute Permissions
+ 7  |  5  |  5
+
+
+chmod 777 shortcheat.txt
+
+chmod u+w shortcheat.txt
+chmod u+x,g-w shortcheat.txt
+
+
+MANUEL/HELP
+
+man ls

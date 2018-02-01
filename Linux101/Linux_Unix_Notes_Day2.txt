@@ -1,0 +1,60 @@
+Notes from Linux 101 DAY 2 = Jul 20 1:30pm, Wednesday
+
+ssh -X amielp@dante.u.washington.edu
+
+
+TO COUNT THE NUMBER OF ... :
+ls -la | wc
+
+MOVING/RENAMING FILES:
+mv /dir1/dir2/text.txt ~/Stuff/backup/abc.txt	#renames text.txt to abc.txt
+
+From Current Directory:
+mv test.txt ../Stuff/backup/abc.txt #similar renaming
+
+
+FOR SHARED SYSTEM, HARDRIVE USE:
+df -h   #-h in human readable form
+
+ls -lagh
+
+TO DETERMINE TIME:
+date	#pacific time
+date -u	#universal time
+
+TO DETERMINE CURRENT USERNAME:
+whoami
+
+TO DETERMINE WHO IS ON SYSTEM:
+who
+who | more
+
+TO DETERMINE WHO WAS IN THE SYSTEM:
+last
+last | more
+
+TO DETERMINE HOSTNAME:
+hostname
+
+TO FIND HISTORY OF COMMANDS:
+history
+!544 	#repeats history #544
+
+INITIAL SETUP STUFF:
+set
+
+REPEATS WHAT YOU ASK FOR:
+echo this is a test
+echo $USER
+echo $PS1
+echo $SHELL
+
+NOTES ON SHELLS:
+c/ => t shell
+psh/ => bash
+
+ls -la $SHELL
+-rwxr-xr-x 1 root root 906248 May 10 16:21 /bin/bash
+
+SPITTING OUT INFO:
+cat Names.txt |more

@@ -1,0 +1,65 @@
+Linux_Unix_Notes_Day4
+
+chgrp dyak-test wswTest.txt
+dante.astro.uw.edu
+
+SEARCHING:
+find . -name “Big*”
+find . -name “*wsw*”
+
+CHANGING DATE:
+touch test.txt
+
+REMOVING FILES:
+rm -r ./Files 	#removes files recursively i.e. all files within Files and directories within files
+
+vi Wilson\ Linux\ Cheat\ Sheet.txt
+
+TO FIND FILES >2000k and put them inside Files_GT_2MB.txt:
+find  ~  -type f  -size +2000k  -exec ls -lah {} \; | awk '{ print $9 ": " $5 }'  | sort  > Files_GT_2MB.txt
+
+find ./dark_0* -exec hselect {} \; EXPOSURE yes 
+
+TARING & SEARCHING FILES:
+dante12$ grep -i tar Wilson\ Linux\ Cheat\ Sheet.txt 
+tar  -czvf  myproject.tar  *.c      Create Tar (with gzip) file "myproject.tar" with all FILES matching pattern *.c in VERBOSE mode
+tar  -xvf  myproject.tar                  Un-Tar/Zip and Extract the files
+tar  -vtf  myproject.tar                  List Contents in TAR file "myproject.tar"
+tar  -czvf  myproject.tar  *.c  Create Tar (with gzip) file "myproject.tar" with all FILES matching pattern *.c in VERBOSE mode
+
+dante12$ tar -czvf Stuff.tar ./Stuff/
+./Stuff/
+./Stuff/a.out
+dante12$ tar -vtf Stuff.tar
+drwxr-xr-x amielp/users      0 2016-07-14 09:59 ./Stuff/
+-rw-r--r-- amielp/users   6930 2016-07-14 09:59 ./Stuff/a.out	#Note that tar files will replace files of same name
+
+
+RUNNING MULTIPLE SIMULATIONS/SCHEDULING PROGRAMS:
+crontab -l
+
+EXAMPLE:
+dante12$ cat ./MyCronBackup.sh 
+#!/bin/bash
+cp ~/*   ~/MyCronBackupFolder
+
+
+RUNNING PROGRAMS:
+dante12$ vi EditMyFile.sh
+
+#!/bin/bash
+
+cp ./test/txt ./test.BACKUP
+vi ./test.txt
+
+dante12$ chmod +x EditMyFile.sh	#changing permissions
+
+dante12$ ./EditMyFile.sh		#path is set as ./ in this line
+
+
+RUNNING PYTHON PROGRAM:
+dante12$ cat HelloWorld.py 
+#!/usr/local/bin/python	#TO FIND PATH: dante12$ which python
+
+print "hello world"
+
